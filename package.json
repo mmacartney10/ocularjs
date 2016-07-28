@@ -1,0 +1,16 @@
+{
+  "name": "mattmacartney",
+  "version": "1.0.0",
+  "description": "",
+  "main": "website.js",
+  "scripts": {
+    "start": "node website.js",
+    "phantom": "phantomjs phantomjs/screenShot.js"
+  },
+  "author": "Matt Macartney",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "express": "^4.13.4"
+  }
+}
