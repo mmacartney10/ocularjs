@@ -89,12 +89,12 @@ function loopThroughEachComponent () {
 function handleEachComponent () {
   var base64Path = getBase64Path();
 
-  if (fs.exists(base64Path)) {
-    if (compareBase64(base64Path)) {
-      logImageComparisonMessage(true);
-      return;
-    }
-  }
+  // if (fs.exists(base64Path)) {
+  //   if (compareBase64(base64Path)) {
+  //     logImageComparisonMessage(true);
+  //     return;
+  //   }
+  // }
 
   if (checkIfComponentExists(obj.selectorList[currentSelector]) === false) {
     console.log(screenShotName().red + ' does not exist'.red);
