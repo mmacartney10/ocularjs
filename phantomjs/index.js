@@ -13,28 +13,24 @@ var spawn = require('child_process').spawn;
 var data = require('../data.json');
 var dataAsString = JSON.stringify(data);
 
-var file = 'screenShot.js';
-// var file = 'test.js';
+var fileName = 'screenShot.js';
+var filePath = path.join(__dirname, fileName);
 
 function generate () {
 
   for (var viewport in data.viewports) {
-    callScreenShot('screenShot.js', viewport, data.viewports[viewport]);
+    callScreenShot(viewport, data.viewports[viewport]);
   }
-
-  // delete data.viewports;
-  // console.log(data);
-
 }
 
-function callScreenShot (fileName, viewportName, viewports) {
+function callScreenShot (viewportName, viewports) {
 
   if (viewportName === undefined || viewports === undefined) {
     throw new Error('Viewport not specified');
   }
 
   var childArgs = [
-    path.join(__dirname, fileName),
+    filePath,
     userArguments,
     dataAsString,
     viewportName,
@@ -44,16 +40,16 @@ function callScreenShot (fileName, viewportName, viewports) {
   var child = spawn(phantomjs.path, childArgs);
 
   child.stdout.on('data', function (data) {
-    console.log('stdout: ' + data);
+    console.log('-' + data);
   });
 
-  child.stderr.on('data', function (data) {
-    console.log('stderr: ' + data);
-  });
-
-  child.on('close', function (code) {
-    console.log('child process exited with code ' + code);
-  });
+  // child.stderr.on('data', function (data) {
+  //   console.log('stderr: ' + data);
+  // });
+  //
+  // child.on('close', function (code) {
+  //   console.log('child process exited with code ' + code);
+  // });
 }
 
 generate();
