@@ -1,3 +1,4 @@
+
 # Visual regression testing
 
 Faster, more user friendly visual regression testing. Used to tell a developer which components on a website have been affected by code changes, and gives a developer more visibility over a website. Involves three steps:

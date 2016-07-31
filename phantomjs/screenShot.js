@@ -1,51 +1,23 @@
-var obj = {
-  pageUrl: 'http://localhost:7000/',
-  screenShotsPath: './screenshots/',
-  viewports: {
-    smallScreen: [320, 480],
-    mediumScreen_landscape: [768, 1024],
-    mediumScreen_portrait: [1024, 768],
-    largeScreen : [1920, 1080]
-  },
-  selectorList: {
-    containerOne: '[data-container-one]',
-		containerTwo: '[data-container-two]',
-		containerThree: '[data-container-three]',
-		containerFour: '[data-container-four]',
-		containerFive: '[data-container-five]',
-		containerSix: '[data-container-six]',
-		containerSeven: '[data-container-seven]',
-		containerEight: '[data-container-eight]',
-		containerNine: '[data-container-nine]',
-		containerTen: '[data-container-ten]',
-		containerEleven: '[data-container-eleven]',
-		containerTwelve: '[data-container-twelve]',
-		containerThirteen: '[data-container-thirteen]',
-		containerFourteen: '[data-container-fourteen]',
-		containerFifteen: '[data-container-fifteen]',
-		containerSixteen: '[data-container-sixteen]',
-		containerSeventeen: '[data-container-seventeen]',
-		containerEighteen: '[data-container-eighteen]',
-		containerNineteen: '[data-container-nineteen]',
-		containerTwenty: '[data-container-twenty]'
-  }
-};
-
 var page = require('webpage').create();
 var fs = require('fs');
 var colors = require('colors');
 
-var isReference = false;
-var path = '';
-
 var currentViewport;
 var currentSelector;
 
+var path = '';
 var referenceFolder = 'reference/';
 var testFolder = 'test/';
 
+var args = require('system').args;
+var isReference = args[1] === 'test' ? false : true;
+var data = JSON.parse(args[2]);
+
+var viewportName = args[3];
+var viewports = args[4];
+
 function openPage () {
-  page.open(obj.pageUrl, function (status) {
+  page.open(data.pageUrl, function (status) {
     if(status !== 'success') return;
 
     checkIfIsReference();
@@ -56,19 +28,19 @@ function openPage () {
 }
 
 function loopThroughEachBreakpoint () {
-  for (var viewport in obj.viewports) {
-    currentViewport = viewport;
 
-    setViewPortSize(obj.viewports[viewport]);
-    loopThroughEachComponent();
-  }
+  currentViewport = viewportName;
+  var viewportsArray = viewports.split(',');
+
+  setViewPortSize(viewportsArray);
+  loopThroughEachComponent();
 }
 
 function checkIfIsReference () {
-  path = obj.screenShotsPath + testFolder;
+  path = data.screenShotsPath + testFolder;
 
   if (isReference) {
-    path = obj.screenShotsPath + referenceFolder;
+    path = data.screenShotsPath + referenceFolder;
   }
 }
 
@@ -80,7 +52,7 @@ function setViewPortSize (viewportDimensions) {
 }
 
 function loopThroughEachComponent () {
-  for (var selector in obj.selectorList) {
+  for (var selector in data.selectorList) {
     currentSelector = selector;
     handleEachComponent();
   }
@@ -96,12 +68,12 @@ function handleEachComponent () {
   //   }
   // }
 
-  if (checkIfComponentExists(obj.selectorList[currentSelector]) === false) {
+  if (checkIfComponentExists(data.selectorList[currentSelector]) === false) {
     console.log(screenShotName().red + ' does not exist'.red);
     return;
   }
 
-  clipPageToComponent(obj.selectorList[currentSelector]);
+  clipPageToComponent(data.selectorList[currentSelector]);
   screenshotElement();
   handleBase64();
 }
@@ -135,8 +107,10 @@ function logReferenceMessage () {
 function handleBase64 () {
   var base64Path = getBase64Path();
   writeBase64(base64Path);
-  var isTheSame = compareBase64(base64Path);
 
+  if (isReference) return;
+
+  var isTheSame = compareBase64(base64Path);
   logImageComparisonMessage(isTheSame);
 }
 
@@ -152,13 +126,7 @@ function compareBase64(base64Path) {
 
   var base64Reference = fs.read(base64ReferencePath);
 
-  var passedMessage = 'Passed - ' + screenShotName();
-  var failedMessage = 'Failed - ' + screenShotName();
-
-  if (base64Reference === getBase64Image()) {
-    return true;
-  }
-
+  if (base64Reference === getBase64Image()) return true;
   return false;
 }
 
