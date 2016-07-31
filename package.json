@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node website.js",
     "reference": "node phantomjs/index.js",
-    "test": "node phantomjs/index.js test"
+    "test": "node phantomjs/index.js test",
+    "cli": "node phantomjs/cli.js"
   },
   "author": "Matt Macartney",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "cli": "^0.11.2",
     "colors": "^1.1.2",
     "express": "^4.13.4",
+    "node-watch": "^0.4.0",
     "phantomjs": "^2.1.7"
   }
 }

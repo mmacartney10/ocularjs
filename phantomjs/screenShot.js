@@ -27,7 +27,7 @@ function openPage () {
     checkIfIsReference();
     setViewPortSize();
     loopThroughEachComponent();
-
+    
     phantom.exit();
   });
 }
