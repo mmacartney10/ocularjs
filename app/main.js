@@ -8,13 +8,15 @@ var questions = [
     type: 'list',
     name: 'openingQuestion',
     message: 'Would you like to run reference or test screenshots?:',
-    choices: [ 'Reference', 'Test' ],
+    choices: [ 'Reference', 'Test', 'Exit' ],
     default: 'Reference'
   }
 ]
 
 function askQuestion () {
   inquirer.prompt(questions).then(function (answers) {
+    if (answers.openingQuestion === 'Exit') return;
+
     store.dispatch({
       type: 'TEST',
       answer: answers.openingQuestion,
