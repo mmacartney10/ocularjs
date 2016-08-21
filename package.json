@@ -1,8 +1,9 @@
 {
-  "name": "mattmacartney",
+  "name": "ocularjs",
   "version": "1.0.0",
+  "author": "Matt Macartney",
   "description": "",
-  "main": "website.js",
+  "main": "app.js",
   "scripts": {
     "start": "node website.js",
     "app": "node app/main.js"
@@ -16,5 +17,8 @@
     "inquirer": "^1.1.2",
     "phantomjs": "^2.1.7",
     "redux": "^3.5.2"
+  },
+  "bin": {
+    "ocularjs": "app.js"
   }
 }

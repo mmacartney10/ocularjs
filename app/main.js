@@ -1,42 +1,41 @@
-const store = require('./store')
-const process = require('./process')
-const inquirer = require('inquirer')
-const fs = require('fs');
+module.exports = function (dataPath) {
 
-var questions = [
-  {
-    type: 'list',
-    name: 'openingQuestion',
-    message: 'Would you like to run reference or test screenshots?:',
-    choices: [ 'Reference', 'Test', 'Exit' ],
-    default: 'Reference'
-  }
-]
+  const store = require('./store')
+  const process = require('./process')(dataPath);
+  const inquirer = require('inquirer')
+  const fs = require('fs')
 
-function askQuestion () {
-  inquirer.prompt(questions).then(function (answers) {
-    if (answers.openingQuestion === 'Exit') return;
+  var questions = [
+    {
+      type: 'list',
+      name: 'openingQuestion',
+      message: 'Would you like to run reference or test screenshots?:',
+      choices: [ 'Reference', 'Test', 'Exit' ],
+      default: 'Reference'
+    }
+  ]
 
-    store.dispatch({
-      type: 'TEST',
-      answer: answers.openingQuestion,
-      completed: false
+  function askQuestion () {
+    inquirer.prompt(questions).then(function (answers) {
+      if (answers.openingQuestion === 'Exit') return;
+
+
+
+      store.dispatch({
+        type: 'TEST',
+        answer: answers.openingQuestion,
+        completed: false
+      });
     });
-  });
-}
+  }
 
-function watchDirectory () {
-  fs.watch('./_client', function (event, filename) {
-      console.log('event is: ' + event);
-  });
-}
+  function handleChange() {
+    var completed = store.getState()[0].completed;
+    if (completed === false) return;
+    askQuestion();
+  }
 
-function handleChange() {
-  var completed = store.getState()[0].completed;
-  if (completed === false) return;
   askQuestion();
+
+  store.subscribe(handleChange)
 }
-
-askQuestion();
-
-store.subscribe(handleChange)

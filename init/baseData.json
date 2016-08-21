@@ -1,0 +1,15 @@
+{
+  "pageUrl": "http://localhost:7000/",
+  "screenShotsPath": "./screenshots/",
+	"workingDirectory": "./_client",
+  "viewports": {
+    "smallScreen": [320, 480],
+    "mediumScreen_landscape": [768, 1024],
+    "mediumScreen_portrait": [1024, 768],
+    "largeScreen" : [1920, 1080]
+  },
+  "selectorList": {
+    "containerOne": "[data-container-one]",
+		"containerTwo": "[data-container-two]"
+  }
+}

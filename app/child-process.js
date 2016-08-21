@@ -48,9 +48,6 @@ function setViewPortSize () {
 
 function loopThroughEachComponent () {
   for (var selector in data.selectorList) {
-
-    // checkIfComponentExists(data.selectorList[currentSelector]);
-
     currentSelector = selector;
     handleEachComponent();
   }
