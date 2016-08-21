@@ -50,7 +50,7 @@ module.exports = function (currentDirectory) {
 
       if (currentViewportIndex === viewportLength) {
         store.dispatch({
-          type: 'TEST',
+          type: 'APP',
           answer: store.getState()[0].answer,
           completed: true
         });

@@ -5,7 +5,7 @@ function Reducer() {
   var action = arguments[1];
 
   switch (action.type) {
-    case 'TEST':
+    case 'APP':
       return [{
         answer: action.answer,
         completed: action.completed

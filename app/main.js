@@ -22,7 +22,7 @@ module.exports = function (currentDirectory) {
 
 
       store.dispatch({
-        type: 'TEST',
+        type: 'APP',
         answer: answers.openingQuestion,
         completed: false
       });
