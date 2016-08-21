@@ -1,6 +1,6 @@
 {
   "name": "ocularjs",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "Matt Macartney",
   "license": "ISC",
   "description": "",
@@ -16,7 +16,6 @@
   "bin": {
     "ocularjs": "app.js"
   },
-  "license": "ISC",
   "dependencies": {
     "cli": "^0.11.2",
     "colors": "^1.1.2",
