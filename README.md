@@ -17,4 +17,4 @@ Faster, more user friendly visual regression testing. Used to tell a developer w
 
 * npm install
 * npm start
-* npm run phantom
+* npm run app

@@ -1,0 +1,20 @@
+var createStore = require('redux').createStore;
+
+function Reducer() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'TEST':
+      return [{
+        answer: action.answer,
+        completed: action.completed
+      }]
+    default:
+      return state;
+  }
+};
+
+var store = createStore(Reducer);
+
+module.exports = store;

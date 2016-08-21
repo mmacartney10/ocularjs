@@ -5,18 +5,16 @@
   "main": "website.js",
   "scripts": {
     "start": "node website.js",
-    "reference": "node phantomjs/index.js",
-    "test": "node phantomjs/index.js test",
-    "cli": "node phantomjs/cli.js"
+    "app": "node app/main.js"
   },
   "author": "Matt Macartney",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.0.1",
     "cli": "^0.11.2",
     "colors": "^1.1.2",
     "express": "^4.13.4",
-    "node-watch": "^0.4.0",
-    "phantomjs": "^2.1.7"
+    "inquirer": "^1.1.2",
+    "phantomjs": "^2.1.7",
+    "redux": "^3.5.2"
   }
 }

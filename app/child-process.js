@@ -15,7 +15,7 @@ var messages = {
 };
 
 var args = require('system').args;
-var isReference = args[1] === 'test' ? false : true;
+var isReference = args[1] === 'Test' ? false : true;
 var data = JSON.parse(args[2]);
 var viewportName = args[3];
 var viewports = args[4];
@@ -27,7 +27,7 @@ function openPage () {
     checkIfIsReference();
     setViewPortSize();
     loopThroughEachComponent();
-    
+
     phantom.exit();
   });
 }
@@ -63,7 +63,6 @@ function handleEachComponent () {
   screenshotElement();
   handleBase64();
 }
-
 
 // TODO: Check if component is on page
 function checkIfComponentExists (selector) {
@@ -147,7 +146,7 @@ function logImageComparisonMessage (imagesAreTheSame) {
     return;
   }
 
-  console.log(passedMessage.red);
+  console.log(failedMessage.red);
 }
 
 openPage();

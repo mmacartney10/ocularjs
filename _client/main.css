@@ -14,8 +14,8 @@ body {
 }
 
 .container--red {
-  background-color: tomato;
-  /*background-color: blue;*/
+  /*background-color: tomato;*/
+  background-color: blue;
 }
 
 .container--yellow {
