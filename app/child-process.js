@@ -19,6 +19,7 @@ var isReference = args[1] === 'Test' ? false : true;
 var data = JSON.parse(args[2]);
 var viewportName = args[3];
 var viewports = args[4];
+var currentDirectory = args[5] + '/ocular/screenshots/';
 
 function openPage () {
   page.open(data.pageUrl, function (status) {
@@ -33,7 +34,7 @@ function openPage () {
 }
 
 function checkIfIsReference () {
-  path = data.screenShotsPath;
+  path = currentDirectory;
   path += isReference ? referenceFolder : testFolder;
 }
 

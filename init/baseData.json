@@ -1,6 +1,5 @@
 {
   "pageUrl": "http://localhost:7000/",
-  "screenShotsPath": "./screenshots/",
 	"workingDirectory": "./_client",
   "viewports": {
     "smallScreen": [320, 480],

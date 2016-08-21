@@ -1,4 +1,4 @@
-module.exports = function (dataPath) {
+module.exports = function (currentDirectory) {
 
   const store = require('./store')
 
@@ -9,8 +9,7 @@ module.exports = function (dataPath) {
   const fileName = 'child-process.js';
   const filePath = path.join(__dirname, fileName);
 
-  // var data = require('../data.json');
-  var data = require(dataPath);
+  var data = require(currentDirectory + '/ocular/data.json');
   var dataAsString = JSON.stringify(data);
 
   var viewportLength = Object.keys(data.viewports).length;
@@ -31,7 +30,8 @@ module.exports = function (dataPath) {
       store.getState()[0].answer,
       dataAsString,
       viewportName,
-      viewportDimensions
+      viewportDimensions,
+      currentDirectory
     ];
 
     var child = spawn(phantomjs.path, childArgs);

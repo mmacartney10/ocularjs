@@ -2,11 +2,19 @@
   "name": "ocularjs",
   "version": "1.0.1",
   "author": "Matt Macartney",
+  "license": "ISC",
   "description": "",
   "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mmacartney10/ocularjs"
+  },
   "scripts": {
-    "start": "node website.js",
+    "start": "node test/website.js",
     "app": "node app/main.js"
+  },
+  "bin": {
+    "ocularjs": "app.js"
   },
   "license": "ISC",
   "dependencies": {
@@ -16,8 +24,5 @@
     "inquirer": "^1.1.2",
     "phantomjs": "^2.1.7",
     "redux": "^3.5.2"
-  },
-  "bin": {
-    "ocularjs": "app.js"
   }
 }

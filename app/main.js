@@ -1,7 +1,7 @@
-module.exports = function (dataPath) {
+module.exports = function (currentDirectory) {
 
   const store = require('./store')
-  const process = require('./process')(dataPath);
+  const process = require('./process')(currentDirectory);
   const inquirer = require('inquirer')
   const fs = require('fs')
 
