@@ -6,6 +6,8 @@ module.exports = function (currentDirectory) {
   var phantomjs = require('phantomjs');
   var spawn = require('child_process').spawn;
 
+  var colors = require('colors');
+
   const fileName = 'child-process.js';
   const filePath = path.join(__dirname, fileName);
 
@@ -37,11 +39,26 @@ module.exports = function (currentDirectory) {
     var child = spawn(phantomjs.path, childArgs);
 
     child.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`);
+      var output = `stdout: ${data}`;
+      var answer = store.getState()[0].answer;
+
+      if (answer === 'Reference') {
+        console.log(output.yellow);
+        return;
+      }
+
+      if (output.indexOf('Passed') > -1) {
+        console.log(output.green);
+        return;
+      }
+
+      console.log(output.red);
+
     });
 
     child.stderr.on('data', (data) => {
-      console.log(`stderr: ${data}`);
+      var output = `stderr: ${data}`;
+      console.log(output.red);
     });
 
     child.on('exit', (code) => {

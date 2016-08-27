@@ -1,6 +1,5 @@
 var page = require('webpage').create();
 var fs = require('fs');
-var colors = require('colors');
 var currentSelector;
 
 var path = '';
@@ -65,10 +64,7 @@ function handleEachComponent () {
 // TODO: Check if component is on page
 function checkIfComponentExists (selector) {
   return page.evaluate (function (selector) {
-    if (document.querySelectorAll(selector)[0] === undefined) {
-      // throw new Error(screenShotName().red + messages.doesNotExist.red);
-      return false;
-    }
+    if (document.querySelectorAll(selector)[0] === undefined) return false;
     return true;
   }, selector);
 }
@@ -87,7 +83,7 @@ function screenshotElement () {
 
 function logReferenceMessage () {
   if (isReference === false) return;
-  console.log(screenShotName().yellow);
+  console.log(screenShotName());
 }
 
 function handleBase64 () {
@@ -129,7 +125,7 @@ function getBase64Path () {
 function getBase64ReferencePath (base64Path) {
   var base64ReferencePath = base64Path.replace(testFolder, referenceFolder);
   if (!fs.exists(base64ReferencePath)) {
-    throw new Error(messages.noReference.red + currentSelector.red);
+    throw new Error(messages.noReference + currentSelector);
   }
 
   return base64ReferencePath;
@@ -140,11 +136,11 @@ function logImageComparisonMessage (imagesAreTheSame) {
   var failedMessage = messages.failed + screenShotName();
 
   if (imagesAreTheSame) {
-    console.log(passedMessage.green);
+    console.log(passedMessage);
     return;
   }
 
-  console.log(failedMessage.red);
+  console.log(failedMessage);
 }
 
 openPage();

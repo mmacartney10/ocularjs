@@ -1,0 +1,32 @@
+Visual regression testing is used to tell a developer which parts of a site have been affected by a code change. It works in a few simple steps:
+- Take a screenshot of a component, call this the reference screenshot
+- Make a style, markup or js change
+- Take another screenshot of the same component, call this the test screenshot
+- Compare the two screenshots, if they are the same the tests passes, if they are different they test fails.
+
+I tested a few different types of regression testing things on the nus extra style guide. The videos show backstopjs and phantomcss, and they are both testing 14 different components across 4 different breakpoints. As you can see they are both taking way too long to complete each test. They both take over two minutes. This is bad because it makes it difficult to get into your workflow.
+
+There are a number ideal places in which visual regression tests can be ran. They could be ran in the background while a developer is working, they could be ran before a commit and they can be ran on the build server. But if they are taking at least 2 minutes to run it adds too much time. So I set about finding a way to test visual regression quicker.
+
+I set some criteria for my visual regression tests:
+- Developer must be able to run the tests while developing to get instant feedback.
+- Should be able to run 100 tests in under 5 seconds
+- Needs an easy to use cli so tests can easily be accepted
+
+So I created my own, called ocularjs. Here is a video of it running the same tests as the video before. I wanted to create something that was very quick and simple to use. Its not supposed to be some big thing, it is just meant to inform a developer what they have changed. If you run the tests very quickly you can see what tests have failed (if any) and if one has failed that you didn't expect then you can check on the site and see if its okay or not.
+
+I have used nodejs, redux and phantomjs to achieve this speed. Right now I have two processes:
+- The cli, which lets the user decide what tests to run (reference, test)
+- The screenshot, this runs an instances of phantomjs as a child process for each breakpoint. Runs multiple tests at the same time, if you have four breakpoints it will run 4 tests at the same time.
+- Redux allows these two processes to run when they need to, because require isn't asyncronous I have used redux to dispatch actions when its done. The other will listen to this and do what it needs. This makes it clean.
+
+Its really easy to setup:
+- npm install ocularjs
+- ocularjs init (creates base json file: show example)
+- ocularjs (decide if to run test or reference)
+
+There are a few things that I haven't added in for this. The image comparison has no leway, so if the images are not the same then the test will fail. So I recommend that the tests are ran on a styleguide where data doesn't change.
+Events cannot be ran right now, so you can't click on a button and test an overlay for example.
+I am currently working on a visual version of this, currently only a cli. The tests run well without it, and I am testing and finding out if this will improve the useablity of these tests.
+
+To recap I have created easy to use visual regression testing suit that is focused on giving quick feedback to the developer, which you can use right now.
