@@ -1,6 +1,5 @@
 {
   "pageUrl": "http://localhost:7000/",
-	"workingDirectory": "./_client",
   "viewports": {
     "smallScreen": [320, 480],
     "mediumScreen_landscape": [768, 1024],

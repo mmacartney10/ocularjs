@@ -3,10 +3,18 @@
 var args = process.argv.slice(2);
 var currentDirectory = process.cwd();
 
+var isInit = false;
+var isWatch = false;
+
 if (args.length === 0) {
   require('./app/main.js')(currentDirectory);
+  return;
 }
 
-if (args[0] === 'init') {
+for (var index = 0; index < args.length; index++) {
+  if (args[index] === 'init') isInit = true;
+}
+
+if (isInit) {
   require('./init/init.js');
 }
