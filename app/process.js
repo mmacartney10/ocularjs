@@ -38,7 +38,7 @@ module.exports = function (currentDirectory) {
     var child = spawn(phantomjs.path, childArgs);
 
     child.stdout.on('data', (data) => {
-      logOutputWithColour(`* ${data}`);
+      logOutputWithColour(`${data}`);
     });
 
     child.stderr.on('data', (data) => {

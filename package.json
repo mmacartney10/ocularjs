@@ -10,7 +10,7 @@
     "url": "https://github.com/mmacartney10/ocularjs"
   },
   "scripts": {
-    "start": "node test/website.js",
+    "start": "node ocularjs-test/website.js",
     "app": "node app/main.js"
   },
   "bin": {
