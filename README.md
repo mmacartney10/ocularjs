@@ -15,10 +15,11 @@ Faster, more user friendly visual regression testing. Used to tell a developer w
 * The user can then decide if the changes are correct or not.
 
 # To Run
-
-* npm install ocularjs (-g for windows)
-* ocularjs init
-* ocularjs
+```sh
+npm install ocularjs -g
+ocularjs init
+ocularjs
+```
 
 # Ocularjs init
 
