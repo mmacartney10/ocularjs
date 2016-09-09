@@ -10,6 +10,10 @@ function Reducer() {
         answer: action.answer,
         completed: action.completed
       }]
+      case 'SCREENSHOT':
+        return [{
+          name: action.name,
+        }]
     default:
       return state;
   }

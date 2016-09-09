@@ -7,7 +7,7 @@ website.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-website.use(express.static('_client'));
+website.use(express.static('ocularjs-test/_client'));
 
 http.listen(7000, function () {
   console.log('Listening on port 7000');

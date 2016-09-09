@@ -6,13 +6,6 @@ var path = '';
 var referenceFolder = 'reference/';
 var testFolder = 'test/';
 
-var messages = {
-  doesNotExist: ' does not exist',
-  passed: 'Passed - ',
-  failed: 'Failed - ',
-  noReference: 'There is no reference image for '
-};
-
 var args = require('system').args;
 var isReference = args[1] === 'Test' ? false : true;
 var data = JSON.parse(args[2]);
@@ -54,19 +47,9 @@ function loopThroughEachComponent () {
 }
 
 function handleEachComponent () {
-  var base64Path = getBase64Path();
-
   clipPageToComponent(data.selectorList[currentSelector]);
   screenshotElement();
   handleBase64();
-}
-
-// TODO: Check if component is on page
-function checkIfComponentExists (selector) {
-  return page.evaluate (function (selector) {
-    if (document.querySelectorAll(selector)[0] === undefined) return false;
-    return true;
-  }, selector);
 }
 
 function clipPageToComponent (selector) {
@@ -82,32 +65,16 @@ function screenshotElement () {
 }
 
 function logReferenceMessage () {
-  if (isReference === false) return;
   console.log(screenShotName());
 }
 
 function handleBase64 () {
   var base64Path = getBase64Path();
   writeBase64(base64Path);
-
-  if (isReference) return;
-
-  var isTheSame = compareBase64(base64Path);
-  logImageComparisonMessage(isTheSame);
 }
 
 function writeBase64 (base64Path) {
   fs.write(base64Path, getBase64Image(), 'w');
-}
-
-function compareBase64(base64Path) {
-  if (isReference) return;
-
-  var base64ReferencePath = getBase64ReferencePath(base64Path);
-  var base64Reference = fs.read(base64ReferencePath);
-
-  if (base64Reference === getBase64Image()) return true;
-  return false;
 }
 
 function screenShotName () {
@@ -120,27 +87,6 @@ function getBase64Image () {
 
 function getBase64Path () {
   return path + screenShotName() + '.txt';
-}
-
-function getBase64ReferencePath (base64Path) {
-  var base64ReferencePath = base64Path.replace(testFolder, referenceFolder);
-  if (!fs.exists(base64ReferencePath)) {
-    throw new Error(messages.noReference + currentSelector);
-  }
-
-  return base64ReferencePath;
-}
-
-function logImageComparisonMessage (imagesAreTheSame) {
-  var passedMessage = messages.passed + screenShotName();
-  var failedMessage = messages.failed + screenShotName();
-
-  if (imagesAreTheSame) {
-    console.log(passedMessage);
-    return;
-  }
-
-  console.log(failedMessage);
 }
 
 openPage();

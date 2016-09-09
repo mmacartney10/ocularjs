@@ -58,12 +58,10 @@ module.exports = function (currentDirectory) {
       return;
     }
 
-    if (output.indexOf('Passed') > -1) {
-      console.log(output.green);
-      return;
-    }
-
-    console.log(output.red);
+    store.dispatch({
+      type: 'SCREENSHOT',
+      name: output,
+    });
   }
 
   function dispatchActionWhenLastChildProcessEnds () {
@@ -79,7 +77,7 @@ module.exports = function (currentDirectory) {
 
   function handleChange () {
     var completed = store.getState()[0].completed;
-    if (completed) return;
+    if (completed || completed === undefined) return;
     loopThroughViewports();
   }
 
