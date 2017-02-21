@@ -10,8 +10,9 @@
     "url": "https://github.com/mmacartney10/ocularjs"
   },
   "scripts": {
-    "start": "node ocularjs-test/website.js",
-    "app": "node app/main.js"
+    "start": "serve ./test/test-site/",
+    "app": "node app/main.js",
+    "test": "./node_modules/.bin/mocha ./test/*.js --timeout 10000"
   },
   "bin": {
     "ocularjs": "app.js"
@@ -20,9 +21,13 @@
     "bluebird": "^3.4.6",
     "cli": "^0.11.2",
     "colors": "^1.1.2",
-    "express": "^4.13.4",
     "inquirer": "^1.1.2",
     "phantomjs": "^2.1.7",
     "redux": "^3.5.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "serve": "^3.4.0"
   }
 }
