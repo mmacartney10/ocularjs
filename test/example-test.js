@@ -22,20 +22,20 @@ function callTest() {
   });
 }
 
-describe('When creating the hiHello string', function() {
-  describe('And the function thisIsTest is called', function() {
-    it('should return the value test', function() {
-      return thisIsTest().then(function(result) {
-        expect(result).to.equal('test');
-      });
-    });
-  });
-
-  describe('And the function hiHello is called', function() {
-    it('should return the value test nothing', function() {
-      return hiHello('test').then(function(result) {
-        expect(result).to.equal('test nothing');
-      });
-    });
-  });
-});
+// describe('When creating the hiHello string', function() {
+//   describe('And the function thisIsTest is called', function() {
+//     it('should return the value test', function() {
+//       return thisIsTest().then(function(result) {
+//         expect(result).to.equal('test');
+//       });
+//     });
+//   });
+//
+//   describe('And the function hiHello is called', function() {
+//     it('should return the value test nothing', function() {
+//       return hiHello('test').then(function(result) {
+//         expect(result).to.equal('test nothing');
+//       });
+//     });
+//   });
+// });
